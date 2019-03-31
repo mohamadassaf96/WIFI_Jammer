@@ -21,18 +21,12 @@ pip3 install scapy
 * Deauth all reachable access points
 
 ```
-python3 script.py --all -i interface_name
-```
-
-* Deauth all reachable access points, using aireplay
-
-```
-python3 script.py --all --aireplay -i interface_name
+python3 script.py --all
 ```
 
 * Deauth a specific access point
 ```
-python3 script.py -b BSSID -i interface_name
+python3 script.py -b BSSID
 ```
 
 you can skip a list of BSSIDs by adding -s BSSID1 BSSID2 ... when deauthing all APs.
