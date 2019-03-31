@@ -5,7 +5,7 @@ import atexit
 from model import *
 
 DN = open(os.devnull, 'w')
-network = Network("", [])
+network = Network("", "", [])
 
 #This will be used later when adding support for multiple cards.
 def get_interfaces():
@@ -21,30 +21,30 @@ def get_interfaces():
     return interfaces
 
 
-def monitor_mode(iface):
+def monitor_mode():
     try:
-        subprocess.run(["ifconfig", iface, "down"], check=True)
-        subprocess.run(["iwconfig", iface, "mode", "monitor"], check=True)
-        subprocess.run(["ifconfig", iface, "up"], check=True)
+        subprocess.run(["ifconfig", network.interface_name, "down"], check=True)
+        subprocess.run(["iwconfig", network.interface_name, "mode", "monitor"], check=True)
+        subprocess.run(["ifconfig", network.interface_name, "up"], check=True)
     except:
         raise Exception("Cannot set interface to monitor mode.")
     output = subprocess.check_output(('grep', 'Mode'), stdin=subprocess.Popen(
-        ('iwconfig', iface), stdout=subprocess.PIPE).stdout)
+        ('iwconfig', network.interface_name), stdout=subprocess.PIPE).stdout)
     if "Monitor" in output.decode():
-        print(iface + " in monitor mode.")
+        print(network.interface_name + " in monitor mode.")
 
 
-def managed_mode(iface):
+def managed_mode():
     try:
-        subprocess.run(["ifconfig", iface, "down"], check=True)
-        subprocess.run(["iwconfig", iface, "mode", "managed"], check=True)
-        subprocess.run(["ifconfig", iface, "up"], check=True)
+        subprocess.run(["ifconfig", network.interface_name, "down"], check=True)
+        subprocess.run(["iwconfig", network.interface_name, "mode", "managed"], check=True)
+        subprocess.run(["ifconfig", network.interface_name, "up"], check=True)
     except:
         raise Exception("Cannot set interface to managed mode.")
     output = subprocess.check_output(('grep', 'Mode'), stdin=subprocess.Popen(
-        ('iwconfig', iface), stdout=subprocess.PIPE).stdout)
+        ('iwconfig', network.interface_name), stdout=subprocess.PIPE).stdout)
     if "Managed" in output.decode():
-        print(iface + " in managed mode.")
+        print(network.interface_name + " in managed mode.")
 
 
 def run_NetworkManeger():
@@ -55,12 +55,12 @@ def run_NetworkManeger():
 
 
 def iwlist_scan(iface):
-    network.set_interface(iface)
+    network.set_interface_name(iface)
     count = 0
     output = subprocess.check_output(('grep', 'Mode'), stdin=subprocess.Popen(
         ('iwconfig', iface), stdout=subprocess.PIPE).stdout)
     if "Monitor" in output.decode():
-        managed_mode(iface)
+        managed_mode()
     while network.APs == []:
         count += 1
         if count > 10:
@@ -73,14 +73,14 @@ def iwlist_scan(iface):
                     ":")+2:], int(output[i+1][output[i+1].find(":")+1:]), []))
 
 
-def set_channel(network, AP):
+def set_channel(AP):
     try:
-        print("Setting %s to channel %d" % (network.interface, AP.channel))
-        subprocess.run(["iwconfig", network.interface,
+        print("Setting %s to channel %d" % (network.interface_name, AP.channel))
+        subprocess.run(["iwconfig", network.interface_name,
                         "channel", str(AP.channel)], check=True)
     except subprocess.CalledProcessError:
         raise subprocess.CalledProcessError(
-            "Error setting %s to channel %d", network.interface, AP.channel)
+            "Error setting %s to channel %d", network.interface_name, AP.channel)
 
 
 def exit_handler():

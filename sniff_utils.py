@@ -1,8 +1,9 @@
 from scapy.all import *
+from wifi_utils import network
 
 def noise_filter(skip, addr1, addr2):
     # Broadcast, broadcast, IPv6mcast, spanning tree, spanning tree, multicast, broadcast
-    ignore = ['ff:ff:ff:ff:ff:ff', '00:00:00:00:00:00', '33:33:00:', '33:33:ff:', '01:80:c2:00:00:00', '01:00:5e:']
+    ignore = ['ff:ff:ff:ff:ff:ff', '00:00:00:00:00:00', '33:33:00:', '33:33:ff:', '01:80:c2:00:00:00', '01:00:5e:', network.interface_mac]
     if skip:
         ignore += [addr.lower() for addr in skip]
     for i in ignore:

@@ -18,12 +18,16 @@ class AP:
 
 
 class Network():
-    def __init__(self, interface, APs):
-        self.interface = interface
+    def __init__(self, interface_name, interface_mac, APs):
+        self.interface_name = interface_name
+        self.interface_mac = interface_mac
         self.APs = APs
 
-    def set_interface(self, interface):
-        self.interface = interface
+    def set_interface_name(self, interface_name):
+        self.interface_name = interface_name
+    
+    def set_interface_mac(self, interface_mac):
+        self.interface_mac = interface_mac
 
     def add_AP(self, AP):
         self.APs.append(AP)
@@ -44,4 +48,5 @@ class Network():
         i = -1
         for i in range(len(self.APs)):
             if self.APs[i].BSSID == BSSID:
-                return i
+                break
+        return i
