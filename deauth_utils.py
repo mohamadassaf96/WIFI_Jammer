@@ -4,7 +4,7 @@ import sys
 
 
 def prepare_attack():
-	monitor_mode(network.interface_name)
+	monitor_mode()
 	kill_processes()
 
 
@@ -35,7 +35,7 @@ def deauth_all(skip):
 		for AP in network.APs:
 			if AP.BSSID in skip:
 				continue
-			set_channel(network, AP)
+			set_channel(AP)
 			mac_changer()
 			send_AP_deauth(AP)
 

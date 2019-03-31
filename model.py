@@ -3,12 +3,12 @@ from scapy.all import *
 
 class AP:
     def __init__(self, BSSID, channel, clients):
-        self.BSSID = BSSID
+        self.BSSID = BSSID.lower()
         self.channel = channel
         self.clients = clients
 
     def add_client(self, client):
-        self.clients.append(client)
+        self.clients.append(client.lower())
 
     def build_AP_deauth_pkt(self):
         return RadioTap()/Dot11(addr1="FF:FF:FF:FF:FF:FF", addr2=self.BSSID, addr3=self.BSSID)/Dot11Deauth()
@@ -20,14 +20,14 @@ class AP:
 class Network():
     def __init__(self, interface_name, interface_mac, APs):
         self.interface_name = interface_name
-        self.interface_mac = interface_mac
+        self.interface_mac = interface_mac.lower()
         self.APs = APs
 
     def set_interface_name(self, interface_name):
         self.interface_name = interface_name
     
     def set_interface_mac(self, interface_mac):
-        self.interface_mac = interface_mac
+        self.interface_mac = interface_mac.lower()
 
     def add_AP(self, AP):
         self.APs.append(AP)

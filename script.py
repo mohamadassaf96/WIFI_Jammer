@@ -1,6 +1,8 @@
 from deauth_utils import *
 from wifi_utils import *
 import argparse
+import threading
+from signal import SIGINT, signal
 
 
 def parse_args():
@@ -21,5 +23,9 @@ if __name__ == "__main__":
 	atexit.register(exit_handler)
 	if args.all:
 		deauth_all(args.skip)
+		# death = Thread(target=deauth_all, args=(args.skip,))
+		# death.daemon = True
+		# death.start()
+		# signal(SIGINT, stop)
 	else:
 		deauth_AP(args.bssid)

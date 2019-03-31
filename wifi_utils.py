@@ -85,5 +85,8 @@ def set_channel(AP):
 
 def exit_handler():
     for iface in get_interfaces():
-        managed_mode(iface)
+        managed_mode()
         run_NetworkManeger()
+
+def stop():
+    print("exiting")
