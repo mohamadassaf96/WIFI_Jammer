@@ -24,7 +24,9 @@ def analyze_pkt(pkt):
             print(pkt.addr1)
             # network.add_client(pkt.addr2, pkt.addr1)
 
-def PacketHandler(packet) :
+
+def PacketHandler(packet):
+    print(packet.show())
     if packet.haslayer(Dot11) :
         print("Access Point MAC: %s with SSID: %s " %(packet.addr2, packet.info))
 
@@ -32,6 +34,6 @@ def PacketHandler(packet) :
 iwlist_scan("wlan0")
 prepare_attack()
 try:
-    sniff(iface="wlan0", store=False, prn = PacketHandler)
+    sniff(iface="wlan0", store=False, prn = PacketHandler, count = 1)
 except Exception as e:
     print(str(e))
