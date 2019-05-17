@@ -22,7 +22,6 @@ def deauth_AP(BSSID):
 	set_channel(AP)
 	prepare_attack()
 	while 1:
-		mac_changer()
 		send_AP_deauth(AP)
 
 
@@ -36,24 +35,7 @@ def deauth_all(skip):
 			if AP.BSSID in skip:
 				continue
 			set_channel(AP)
-			mac_changer()
 			send_AP_deauth(AP)
-
-
-def mac_changer():
-	try:
-		print("Changing MAC address on %s" % network.interface_name)
-		subprocess.run(["ifconfig", network.interface_name, "down"],
-		               check=True, capture_output=True)
-		subprocess.run(["macchanger", "-r", network.interface_name],
-		               check=True, capture_output=True)
-		subprocess.run(["ifconfig", network.interface_name, "up"],
-		               check=True, capture_output=True)
-		network.set_interface_mac(((subprocess.check_output(
-			("macchanger", "-s", network.interface_name)).decode().split("\n")[0])[15:32]).lower())
-	except:
-		raise subprocess.CalledProcessError("Error changing MAC address.")
-
 
 def kill_processes():
     try:
