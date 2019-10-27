@@ -22,16 +22,8 @@ class AP:
 class Network():
     def __init__(self, interface_name, interface_mac, APs):
         self.interface_name = interface_name
-        self.interface_mac = self.getHwAddr(self.interface_name)
+        self.interface_mac = interface_mac
         self.APs = APs
-
-    def getHwAddr(self, ifacename):
-    '''
-    https://stackoverflow.com/questions/159137/getting-mac-address
-    '''
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    info = fcntl.ioctl(s.fileno(), 0x8927,  struct.pack('256s', bytes(ifname, 'utf-8')[:15]))
-    return ':'.join('%02x' % b for b in info[18:24])
 
     def set_interface_name(self, interface_name):
         self.interface_name = interface_name

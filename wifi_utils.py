@@ -63,7 +63,7 @@ def iwlist_scan(iface):
         managed_mode()
     while network.APs == []:
         count += 1
-        if count > 10:
+        if count > 20:
             raise Exception("Can't find any AP.")
         ps = subprocess.run(['iwlist', iface, 'scan'], capture_output=True)
         output = ps.stdout.decode().split("\n")
