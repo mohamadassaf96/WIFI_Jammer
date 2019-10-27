@@ -26,14 +26,15 @@ def analyze_pkt(pkt):
 
 
 def PacketHandler(packet):
-    print(packet.show())
-    if packet.haslayer(Dot11) :
-        print("Access Point MAC: %s with SSID: %s " %(packet.addr2, packet.info))
-
+    if packet.haslayer(Dot11):
+        if packet.type == 0 and packet.subtype == 8:
+                print("Access Point MAC: %s with SSID: %s " %(packet.addr2, packet.info))
 
 iwlist_scan("wlan0")
 prepare_attack()
+atexit.register(exit_handler)
 try:
-    sniff(iface="wlan0", store=False, prn = PacketHandler, count = 1)
+    while (1):
+        sniff(iface="wlan0", store=False, prn = PacketHandler, count=1)
 except Exception as e:
     print(str(e))

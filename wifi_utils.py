@@ -14,7 +14,7 @@ def get_interfaces():
         iwcofig_cmd = subprocess.Popen(
             ["iwconfig"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     except OSError:
-        raise OSError("could not execute iwconfig. exiting ..")
+        raise OSError("could not execute iwconfig. exiting ...")
     for line in iwcofig_cmd.communicate()[0].decode().split("\n"):
         if "IEEE 802.11" in line:
             interfaces.append(line[:line.find("  ")])
