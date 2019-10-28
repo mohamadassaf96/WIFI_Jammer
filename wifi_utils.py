@@ -82,7 +82,6 @@ def set_channel(AP):
         raise subprocess.CalledProcessError(
             "Error setting %s to channel %d", network.interface_name, AP.channel)
 
-
 def exit_handler():
     for iface in get_interfaces():
         managed_mode()

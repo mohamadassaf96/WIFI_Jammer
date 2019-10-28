@@ -1,4 +1,5 @@
 from scapy.all import *
+from subprocess import check_output
 import fcntl
 import socket
 import struct
@@ -27,6 +28,7 @@ class Network():
 
     def set_interface_name(self, interface_name):
         self.interface_name = interface_name
+        self.interface_mac = self.get_mac(interface_name)
     
     def set_interface_mac(self, interface_mac):
         self.interface_mac = interface_mac.lower()
@@ -52,3 +54,12 @@ class Network():
             if self.APs[i].BSSID == BSSID:
                 break
         return i
+
+    def get_mac(self, ifacename):
+        try:
+            print("Retrieving MAC address of interface %s" % (ifacename))
+            output = subprocess.check_output("macchanger -s " + ifacename, shell=True)
+            line = str(output.decode().split("\n")[0])
+            return line[line.find("   ")+3:line.find("   ")+20]
+        except:
+            print("Warning: Could not get interface MAC address.")
