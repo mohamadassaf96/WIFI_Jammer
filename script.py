@@ -1,7 +1,8 @@
 from deauth_utils import *
 from wifi_utils import *
+from sniff_utils import launch_sniffing
 import argparse
-import threading
+from threading import Thread
 from signal import SIGINT, signal
 
 
@@ -21,6 +22,8 @@ def parse_args():
 if __name__ == "__main__":
 	args = parse_args()
 	atexit.register(exit_handler)
+	hop = Thread(target=deauth_all, args=(args.skip,))
+	hop.daemon = True
 	if args.all:
 		deauth_all(args.skip)
 	else:

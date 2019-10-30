@@ -36,11 +36,13 @@ class Network():
     def add_AP(self, AP):
         self.APs.append(AP)
 
-    def add_client(self, BSSID, client):
-        i = self.find_AP(BSSID)
-        if i == -1:
-            return
-        self.APs[i].add_client(client)
+    def add_client(self, src_mac, dst_mac):
+        n1 = self.find_AP(src_mac)
+        n2 = self.find_AP(dst_mac)
+        if n1 != -1:
+            self.APs[n1].add_client(dst_mac)
+        elif n2 != -1:
+            self.APs[n2].add_client(src_mac)
 
     def get_AP(self, BSSID):
         i = self.find_AP(BSSID)
@@ -50,9 +52,9 @@ class Network():
 
     def find_AP(self, BSSID):
         i = -1
-        for i in range(len(self.APs)):
-            if self.APs[i].BSSID == BSSID:
-                break
+        for k in range(len(self.APs)):
+            if self.APs[k].BSSID == BSSID:
+                i = k
         return i
 
     def get_mac(self, ifacename):

