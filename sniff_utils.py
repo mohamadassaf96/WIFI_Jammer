@@ -42,9 +42,7 @@ def add_AP(pkt):
         ap_channel = str(ord(pkt[Dot11Elt:3].info))
     except:
         return
-    if network.find_AP(bssid) == -1:
-        new_AP = AP(bssid, ap_channel, [])
-        network.add_AP(new_AP)
+    network.add_AP_BSSID(bssid, ap_channel)
 
 def launch_sniffing(skip):
     construct_ignore_list(skip)

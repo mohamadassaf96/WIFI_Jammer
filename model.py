@@ -11,6 +11,8 @@ class AP:
         self.clients = clients
 
     def add_client(self, client):
+        if client in self.clients:
+            return
         self.clients.append(client.lower())
 
     def build_AP_deauth_pkt(self):
@@ -35,6 +37,11 @@ class Network():
 
     def add_AP(self, AP):
         self.APs.append(AP)
+
+    def add_AP_BSSID(self, bssid, ap_channel):
+        if self.find_AP(bssid) == -1:
+            new_AP = AP(bssid, ap_channel, [])
+            self.APs.append(new_AP)
 
     def add_client(self, src_mac, dst_mac):
         n1 = self.find_AP(src_mac)

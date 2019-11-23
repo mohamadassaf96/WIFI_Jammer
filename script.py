@@ -22,8 +22,14 @@ def parse_args():
 if __name__ == "__main__":
 	args = parse_args()
 	atexit.register(exit_handler)
-	hop = Thread(target=deauth_all, args=(args.skip,))
-	hop.daemon = True
+	interfaces = get_interfaces()
+	iface = interfaces[0]  # we will use just one interface for now.
+	iwlist_scan(iface)
+	prepare_attack()
+	# launch_sniffing(args.skip)
+	# hop = Thread(target=launch_sniffing, args=(args.skip,))
+	# hop.daemon = True
+	# hop.start()
 	if args.all:
 		deauth_all(args.skip)
 	else:
