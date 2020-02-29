@@ -26,10 +26,9 @@ if __name__ == "__main__":
 	iface = interfaces[0]  # we will use just one interface for now.
 	iwlist_scan(iface)
 	prepare_attack()
-	# launch_sniffing(args.skip)
-	# hop = Thread(target=launch_sniffing, args=(args.skip,))
-	# hop.daemon = True
-	# hop.start()
+	hop = Thread(target=launch_sniffing, args=(args.skip,))
+	hop.daemon = True
+	hop.start()
 	if args.all:
 		deauth_all(args.skip)
 	else:

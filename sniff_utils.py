@@ -13,12 +13,15 @@ def construct_ignore_list(skip):
 
 def noise_filter(addr1, addr2):
     for i in ignore:
-        if i in addr1 or i in addr2:
+        if i==addr1 or i==addr2:
             return True
     return False
 
 
 def analyze_pkt(pkt):
+    if pkt.addr1 is None or pkt.addr2 is None:
+        return
+        
     if pkt.haslayer(Dot11FCS):
         if pkt.addr1 and pkt.addr2:
             pkt.addr1 = pkt.addr1.lower()
