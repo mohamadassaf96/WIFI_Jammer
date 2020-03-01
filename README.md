@@ -1,6 +1,9 @@
-# wifi_jammer
+# WIFI_Jammer
 
-All the following must be run as root.
+## Description
+
+The application jams all reachable access points and their clients. First, it scans the network and gets all access points --will be deprecated, Second, continuously sniff packets to find additional access points and catch their clients. Finally it impersonates each access points and sends both generic and client-targeted deauth packets.
+Only compatible with Kali Linux. All the following commands must be run as root.
 
 ## Prerequisites
 
