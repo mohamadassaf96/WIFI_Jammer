@@ -55,25 +55,6 @@ def run_NetworkManeger():
         raise Exception("Cannot start NetworkManager service.")
 
 
-def iwlist_scan():
-    iface = network.interface_name
-    count = 0
-    output = subprocess.check_output(('grep', 'Mode'), stdin=subprocess.Popen(
-        ('iwconfig', iface), stdout=subprocess.PIPE).stdout)
-    if "Monitor" in output.decode():
-        managed_mode()
-    while network.APs == []:
-        count += 1
-        if count > 20:
-            raise Exception("Can't find any AP.")
-        ps = subprocess.run(['iwlist', iface, 'scan'], capture_output=True)
-        output = ps.stdout.decode().split("\n")
-        for i in range(len(output)):
-            if "Address" in output[i]:
-                network.add_AP(AP(output[i][output[i].find(
-                    ":")+2:], int(output[i+1][output[i+1].find(":")+1:]), []))
-
-
 def set_channel(AP):
     try:
         print("Setting %s to channel %d" % (network.interface_name, AP.channel))
