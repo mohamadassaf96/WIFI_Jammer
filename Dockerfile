@@ -6,11 +6,11 @@ RUN apt-get update && apt-get install -y \
   python3.7 \
   python3-pip \
   pkg-config \
-  zip \
   net-tools \
-  aircrack-ng \
+  wireless-tools \
   g++ \
   zlib1g-dev \
-  git-core \
   python-minimal \
   && python3.7 -m pip install scapy
+
+WORKDIR WIFI_Jammer/

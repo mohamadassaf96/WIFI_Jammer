@@ -50,6 +50,6 @@ def add_AP(pkt):
 def launch_sniffing(skip):
     construct_ignore_list(skip)
     try:
-        sniff(iface="wlan0", store=False, prn = analyze_pkt)
+        sniff(iface=network.interface_name, store=False, prn = analyze_pkt)
     except Exception as e:
         print(str(e))
