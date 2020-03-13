@@ -23,8 +23,6 @@ if __name__ == "__main__":
 	args = parse_args()
 	atexit.register(exit_handler)
 	interfaces = get_interfaces()
-	iface = interfaces[0]  # we will use just one interface for now.
-	iwlist_scan(iface)
 	prepare_attack()
 	hop = Thread(target=launch_sniffing, args=(args.skip,))
 	hop.daemon = True

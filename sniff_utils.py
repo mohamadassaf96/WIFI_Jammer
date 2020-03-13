@@ -19,6 +19,9 @@ def noise_filter(addr1, addr2):
 
 
 def analyze_pkt(pkt):
+    if not pkt.haslayer(Dot11FCS):
+        return
+    
     if pkt.addr1 is None or pkt.addr2 is None:
         return
         

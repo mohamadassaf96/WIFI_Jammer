@@ -18,6 +18,7 @@ def get_interfaces():
     for line in iwcofig_cmd.communicate()[0].decode().split("\n"):
         if "IEEE 802.11" in line:
             interfaces.append(line[:line.find("  ")])
+    network.set_interface_name(interfaces[0])
     return interfaces
 
 
@@ -55,7 +56,6 @@ def run_NetworkManeger():
 
 
 def iwlist_scan(iface):
-    network.set_interface_name(iface)
     count = 0
     output = subprocess.check_output(('grep', 'Mode'), stdin=subprocess.Popen(
         ('iwconfig', iface), stdout=subprocess.PIPE).stdout)

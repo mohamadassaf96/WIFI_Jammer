@@ -7,7 +7,7 @@ import struct
 class AP:
     def __init__(self, BSSID, channel, clients):
         self.BSSID = BSSID.lower()
-        self.channel = channel
+        self.channel = int(channel)
         self.clients = clients
 
     def add_client(self, client):
