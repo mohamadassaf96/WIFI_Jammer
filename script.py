@@ -23,6 +23,7 @@ if __name__ == "__main__":
 	args = parse_args()
 	atexit.register(exit_handler)
 	interfaces = get_interfaces()
+	iwlist_scan()
 	prepare_attack()
 	hop = Thread(target=launch_sniffing, args=(args.skip,))
 	hop.daemon = True

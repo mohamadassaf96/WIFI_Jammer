@@ -55,7 +55,8 @@ def run_NetworkManeger():
         raise Exception("Cannot start NetworkManager service.")
 
 
-def iwlist_scan(iface):
+def iwlist_scan():
+    iface = network.interface_name
     count = 0
     output = subprocess.check_output(('grep', 'Mode'), stdin=subprocess.Popen(
         ('iwconfig', iface), stdout=subprocess.PIPE).stdout)
