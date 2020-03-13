@@ -5,7 +5,7 @@ import sys
 
 def prepare_attack():
 	monitor_mode()
-	kill_processes()
+	#kill_processes() not necessary
 
 
 def send_AP_deauth(AP):

@@ -3,7 +3,7 @@
 ## Description
 
 The application jams all reachable access points and their clients. First, it scans the network and gets all access points --will be deprecated, Second, continuously sniff packets to find additional access points and catch their clients. Finally it impersonates each access points and sends both generic and client-targeted deauth packets.
-Only compatible with Kali Linux. All the following commands must be run as root.
+All the following commands must be run as root.
 
 ## Prerequisites
 
@@ -37,5 +37,4 @@ you can skip a list of BSSIDs by adding -s BSSID1 BSSID2 ... when deauthing all 
 ## Planned features
 
 * Implement a Docker container for the application
-* Make application compatible with Ubuntu (remove Kali commands)
 * Ameliorate runtime messages
