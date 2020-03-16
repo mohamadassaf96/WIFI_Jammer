@@ -9,6 +9,10 @@ The application jams all reachable access points and their clients. First, it co
 * Object oriented design
 * Containerized plug-and-play application
 
+## What's Special
+* Object oriented design
+* Containerized plug-and-play application
+
 ## Build Docker Image
 
 Navigate to root directory
