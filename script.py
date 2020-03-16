@@ -21,7 +21,6 @@ def parse_args():
 
 if __name__ == "__main__":
 	args = parse_args()
-	atexit.register(exit_handler)
 	interfaces = get_interfaces()
 	prepare_attack()
 	hop = Thread(target=launch_sniffing, args=(args.skip,))

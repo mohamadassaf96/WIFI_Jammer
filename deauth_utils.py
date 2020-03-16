@@ -5,9 +5,7 @@ import sys
 
 def prepare_attack():
 	monitor_mode()
-	kill_processes()
 
-	
 
 def send_AP_deauth(AP):
 	try:
@@ -43,11 +41,3 @@ def deauth_all(skip):
 			set_channel(AP)
 			send_AP_deauth(AP)
 			send_client_deauth(AP)
-
-def kill_processes():
-    try:
-        print("Killing processes that might interfer ...")
-        subprocess.run(["airmon-ng", "check", "kill"],
-                       check=True, capture_output=True)
-    except subprocess.CalledProcessError:
-        raise subprocess.CalledProcessError("Error killing processes.")

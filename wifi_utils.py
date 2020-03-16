@@ -48,13 +48,6 @@ def managed_mode():
         print(network.interface_name + " in managed mode.")
 
 
-def run_NetworkManeger():
-    try:
-        subprocess.run(["service", "NetworkManager", "restart"], check=True)
-    except:
-        raise Exception("Cannot start NetworkManager service.")
-
-
 def set_channel(AP):
     try:
         print("Setting %s to channel %d" % (network.interface_name, AP.channel))
@@ -63,11 +56,6 @@ def set_channel(AP):
     except subprocess.CalledProcessError:
         raise subprocess.CalledProcessError(
             "Error setting %s to channel %d", network.interface_name, AP.channel)
-
-def exit_handler():
-    for iface in get_interfaces():
-        managed_mode()
-        run_NetworkManeger()
 
 def stop():
     print("exiting")

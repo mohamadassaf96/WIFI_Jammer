@@ -58,5 +58,6 @@ def launch_sniffing(skip):
         try:
             sniff(iface=network.interface_name, store=False, prn = analyze_pkt)
         except Exception as e:
+            time.sleep(0.5)
             print(str(e))
     raise Exception("Cannot launch packet sniffing, aborting ...")

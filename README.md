@@ -2,8 +2,12 @@
 
 ## Description
 
-The application jams all reachable access points and their clients. First, it scans the network and gets all access points --will be deprecated, Second, continuously sniff packets to find additional access points and catch their clients. Finally it impersonates each access points and sends both generic and client-targeted deauth packets.
-All the following commands must be run as root.
+The application jams all reachable access points and their clients. First, it continuously sniffs packets to find access points and catch their clients. Then, it impersonates each access point and sends both generic and client-targeted deauth packets.<br/>The application is tested on Kali & Ubuntu Linux.<br/> All the following commands must be run as root.
+
+## What's Special
+
+* Object oriented design
+* Containerized plug-and-play application
 
 ## Build Docker Image
 
@@ -18,7 +22,7 @@ docker build -f Dockerfile -t <tag_name> .
 Navigate to root directory
 
 ```
-docker run --privileged -it --net=host --mount src="$(pwd)",target="/WIFI_Jammer",type=bind <tag_name>
+killall wpa_supplicant && docker run --privileged -it --net=host --mount src="$(pwd)",target="/WIFI_Jammer",type=bind <tag_name>
 ```
 
 ## Usage
@@ -38,5 +42,4 @@ you can skip a list of BSSIDs by adding -s BSSID1 BSSID2 ... when deauthing all 
 
 ## Planned features
 
-* Implement a Docker container for the application
 * Ameliorate runtime messages
