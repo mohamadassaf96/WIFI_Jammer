@@ -9,26 +9,23 @@ The application jams all reachable access points and their clients. First, it co
 * Object oriented design
 * Containerized plug-and-play application
 
-## What's Special
-* Object oriented design
-* Containerized plug-and-play application
+## Build Docker image and run a container
 
-## Build Docker Image
-
-Navigate to root directory
+* Navigate to root directory and build Docker image
 
 ```
 docker build -f Dockerfile -t <tag_name> .
 ```
 
-## Run Docker Container
-
-Navigate to root directory
+* Run Docker container. Please note that we first kill a process "wpa_supplicant" that might intervene with the attack
 
 ```
 killall wpa_supplicant && docker run --privileged -it --net=host --mount src="$(pwd)",target="/WIFI_Jammer",type=bind <tag_name>
 ```
-
+* After you stop the attack, run the below on your OS to restore normal wifi operation.
+```
+./managed_mode.sh --interface_name
+```
 ## Usage
 
 * Deauth all reachable access points

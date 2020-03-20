@@ -10,4 +10,4 @@ RUN apt-get update && apt-get install -y \
   pciutils \
   && python3.7 -m pip install scapy
 
-WORKDIR WIFI_Jammer/
+WORKDIR WIFI_Jammer/src/
