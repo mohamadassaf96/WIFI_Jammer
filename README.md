@@ -9,6 +9,10 @@ The application jams all reachable access points and their clients. First, it co
 * Object oriented design
 * Containerized plug-and-play application
 
+## Disclaimer
+
+As per license, the developer is not liable for any misuse of this application. Deauthing WIFIs is a serious offense in some countries that is punishable by law.
+
 ## Build Docker image and run a container
 
 * Navigate to root directory and build Docker image
