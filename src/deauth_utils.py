@@ -15,6 +15,7 @@ def send_AP_deauth(AP):
 	except:
 		print("deauth packet skipped")
 
+
 def send_client_deauth(AP):
 	try:
 		for client in AP.clients:

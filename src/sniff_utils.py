@@ -11,6 +11,7 @@ def construct_ignore_list(skip):
     if skip:
         ignore += [addr.lower() for addr in skip]
 
+
 def noise_filter(addr1, addr2):
     for i in ignore:
         if i==addr1 or i==addr2:
@@ -39,8 +40,10 @@ def analyze_pkt(pkt):
         if pkt.type in [1, 2]:
             add_client(pkt)
 
+
 def add_client(pkt):
     network.add_client(pkt.addr2.lower(), pkt.addr1.lower())    
+
 
 def add_AP(pkt):
     bssid = pkt.addr3.lower()
@@ -49,6 +52,7 @@ def add_AP(pkt):
     except:
         return
     network.add_AP_BSSID(bssid, ap_channel)
+
 
 def launch_sniffing(skip):
     construct_ignore_list(skip)

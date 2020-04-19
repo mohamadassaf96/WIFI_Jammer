@@ -35,12 +35,12 @@ killall wpa_supplicant && docker run --privileged -it --net=host --mount src="$(
 * Deauth all reachable access points
 
 ```
-python3.7 script.py --all
+python3.7 run.py --all
 ```
 
 * Deauth a specific access point
 ```
-python3.7 script.py -b BSSID
+python3.7 run.py -b BSSID
 ```
 
 you can skip a list of BSSIDs by adding -s BSSID1 BSSID2 ... when deauthing all APs.
